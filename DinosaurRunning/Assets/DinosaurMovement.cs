@@ -7,14 +7,19 @@ public class DinosaurMovement : MonoBehaviour
     [Space]
     [Header("Components")]
     private Rigidbody2D rb;
-    Vector2 movement;
     CharacterController2D characterController;
 
     [Space]
     [Header("Movement")]
     public float Speed;
+    Vector2 movement;
     bool isAlive = true;
-    int facingDir = 1;
+    float facingDir = 1;
+    bool isJumping = false;
+    public Transform groundCheckPos;
+    bool isGrounded;
+    public float groundCheckRadius;
+    public LayerMask whatIsGround;
 
     private void Start()
     {
@@ -30,13 +35,68 @@ public class DinosaurMovement : MonoBehaviour
             return;
         }
 
+        CheckSurroundings();
+         
+        Jump();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isAlive)
+        {
+            Debug.Log("Player Dead");
+            return;
+        }
         Move();
+
     }
 
     void Move()
     {
-        characterController.Move(facingDir * Speed * Time.deltaTime, false, false);
+        characterController.Move(facingDir * Speed * Time.deltaTime, false, jump);
     }
-  
 
+    
+
+    bool jump;
+    void Jump()
+    {
+        if (!Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
+
+        if (!isGrounded)
+        {
+            return;
+        }
+
+        if (isJumping)
+        {
+            return;
+        }
+
+        isJumping = true;
+
+        jump = true;
+
+    }
+
+    void CheckSurroundings()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
+
+       
+    }
+
+    public void OnLand()
+    {
+        isJumping = false;
+        jump = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheckPos.position, groundCheckRadius);
+    }
 }
