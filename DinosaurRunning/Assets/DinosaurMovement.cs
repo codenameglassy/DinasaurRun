@@ -99,4 +99,17 @@ public class DinosaurMovement : MonoBehaviour
     {
         Gizmos.DrawWireSphere(groundCheckPos.position, groundCheckRadius);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            isAlive = false;
+
+            Debug.Log("dead");
+            Destroy(gameObject);
+        }
+    }
+
+
 }
