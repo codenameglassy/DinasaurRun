@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0.865
+  m_LookaheadTime: 1
   m_LookaheadSmoothing: 25
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_DeadZoneHeight: 0.94
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.59
+  m_SoftZoneWidth: 0.44
   m_SoftZoneHeight: 1.56
   m_BiasX: 0
   m_BiasY: 0
@@ -708,7 +708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &558953826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zSpawn: 0
-  tileLength: 9
+  tileLength: 8
   playerTransform: {fileID: 1228470087}
   grounds:
   - {fileID: 3562348251372984430, guid: 0c206e8a4fc801344a1064740dfd9804, type: 3}
@@ -1285,7 +1285,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1019041373
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b64178093a94ff243825037efd60e40a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1374,6 +1374,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  deadPS: {fileID: 8244619519400593337, guid: 3072f4ad9588dfa46a22bb27a598c133, type: 3}
 --- !u!61 &1228470090
 BoxCollider2D:
   m_ObjectHideFlags: 0

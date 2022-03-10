@@ -24,6 +24,7 @@ public class DinosaurMovement : MonoBehaviour
     public LayerMask whatIsGround;
     SpeedIncreaser speedIncreaser;
     float playTime;
+    public GameObject deadPS;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -118,6 +119,7 @@ public class DinosaurMovement : MonoBehaviour
 
             Debug.Log("dead");
             scoreApiManager.SubmitScore(playTime);
+            Instantiate(deadPS, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

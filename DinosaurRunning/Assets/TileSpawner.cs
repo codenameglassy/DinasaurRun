@@ -23,6 +23,8 @@ public class TileSpawner : MonoBehaviour
         if (playerTransform.position.x > zSpawn - tileLength)
         {
             SpawnNext();
+            SpawnNext();
+         
             //CollectableSpawnerManager.instance.SpawnCollectable();
         }
     }
