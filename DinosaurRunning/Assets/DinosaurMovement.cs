@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DinosaurMovement : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DinosaurMovement : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D rb;
     CharacterController2D characterController;
+    public TextMeshProUGUI playerSpeedTxt;
 
     [Space]
     [Header("Movement")]
@@ -20,11 +22,13 @@ public class DinosaurMovement : MonoBehaviour
     bool isGrounded;
     public float groundCheckRadius;
     public LayerMask whatIsGround;
-
+    SpeedIncreaser speedIncreaser;
+    float playTime;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         characterController = GetComponent<CharacterController2D>();
+        speedIncreaser = FindObjectOfType<SpeedIncreaser>();
     }
 
     private void Update()
@@ -34,10 +38,11 @@ public class DinosaurMovement : MonoBehaviour
             Debug.Log("Player Dead");
             return;
         }
-
+        playTime += Time.deltaTime;
         CheckSurroundings();
          
         Jump();
+
     }
 
     private void FixedUpdate()
@@ -48,14 +53,19 @@ public class DinosaurMovement : MonoBehaviour
             return;
         }
         Move();
-
+        PlayerSpeed();
     }
 
     void Move()
     {
-        characterController.Move(facingDir * Speed * Time.deltaTime, false, jump);
+        characterController.Move(facingDir * Speed * speedIncreaser.speedMultiplier * Time.deltaTime, false, jump);
     }
 
+    void PlayerSpeed()
+    {
+        playerSpeedTxt.text = rb.velocity.x.ToString();
+        Debug.Log(rb.velocity.x);
+    }
     
 
     bool jump;
@@ -107,6 +117,7 @@ public class DinosaurMovement : MonoBehaviour
             isAlive = false;
 
             Debug.Log("dead");
+            scoreApiManager.SubmitScore(playTime);
             Destroy(gameObject);
         }
     }
