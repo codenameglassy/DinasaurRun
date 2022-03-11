@@ -10,16 +10,23 @@ public class TileSpawner : MonoBehaviour
     public Transform playerTransform;
 
     public GameObject[] grounds;
+ 
 
     private void Awake()
     {
-
+       
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
     }
 
     private void Update()
     {
+        if(playerTransform == null)
+        {
+            return;
+        }
+
+
         if (playerTransform.position.x > zSpawn - tileLength)
         {
             SpawnNext();

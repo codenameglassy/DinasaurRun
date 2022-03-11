@@ -32,7 +32,7 @@ public class SpeedIncreaser : MonoBehaviour
         currentTime = 0;
         speedMultiplier += .1f;
         currentTime = XTime;
-        Debug.Log(speedMultiplier);
+        //Debug.Log(speedMultiplier);
       
     }
 }

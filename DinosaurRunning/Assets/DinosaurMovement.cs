@@ -15,7 +15,7 @@ public class DinosaurMovement : MonoBehaviour
     [Header("Movement")]
     public float Speed;
     Vector2 movement;
-    bool isAlive = true;
+    [HideInInspector] public bool isAlive = true;
     float facingDir = 1;
     bool isJumping = false;
     public Transform groundCheckPos;
@@ -25,6 +25,11 @@ public class DinosaurMovement : MonoBehaviour
     SpeedIncreaser speedIncreaser;
     float playTime;
     public GameObject deadPS;
+
+    private void Awake()
+    {
+        isAlive = true;
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -64,8 +69,8 @@ public class DinosaurMovement : MonoBehaviour
 
     void PlayerSpeed()
     {
-        playerSpeedTxt.text = rb.velocity.x.ToString();
-        Debug.Log(rb.velocity.x);
+      //  playerSpeedTxt.text = rb.velocity.x.ToString();
+       // Debug.Log(rb.velocity.x);
     }
     
 
