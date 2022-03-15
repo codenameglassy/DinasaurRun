@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class DinosaurMovement : MonoBehaviour
 {
@@ -25,16 +23,19 @@ public class DinosaurMovement : MonoBehaviour
     SpeedIncreaser speedIncreaser;
     float playTime;
     public GameObject deadPS;
+    public GameObject sword;
 
     private void Awake()
     {
         isAlive = true;
+       
     }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         characterController = GetComponent<CharacterController2D>();
         speedIncreaser = FindObjectOfType<SpeedIncreaser>();
+        playAgainBtn.SetActive(false);
     }
 
     private void Update()
@@ -46,7 +47,7 @@ public class DinosaurMovement : MonoBehaviour
         }
         playTime += Time.deltaTime;
         CheckSurroundings();
-         
+
         Jump();
 
     }
@@ -69,10 +70,10 @@ public class DinosaurMovement : MonoBehaviour
 
     void PlayerSpeed()
     {
-      //  playerSpeedTxt.text = rb.velocity.x.ToString();
-       // Debug.Log(rb.velocity.x);
+        //  playerSpeedTxt.text = rb.velocity.x.ToString();
+        // Debug.Log(rb.velocity.x);
     }
-    
+
 
     bool jump;
     void Jump()
@@ -102,7 +103,7 @@ public class DinosaurMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
 
-       
+
     }
 
     public void OnLand()
@@ -116,6 +117,7 @@ public class DinosaurMovement : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheckPos.position, groundCheckRadius);
     }
 
+    [SerializeField] private GameObject playAgainBtn;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -125,9 +127,14 @@ public class DinosaurMovement : MonoBehaviour
             Debug.Log("dead");
             scoreApiManager.SubmitScore(playTime);
             Instantiate(deadPS, transform.position, transform.rotation);
+            playAgainBtn.SetActive(true);
             Destroy(gameObject);
         }
     }
 
+    public void SetSwordState(bool newSwordState)
+    {
+        sword.SetActive(newSwordState);
+    }
 
 }

@@ -7,6 +7,6 @@ public class DestroyGrid : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 20f);
+        Destroy(gameObject, 60f);
     }
 }
